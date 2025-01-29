@@ -221,6 +221,24 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <string>product date</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="AddImage">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>90</y>
+     <width>151</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Add Image</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

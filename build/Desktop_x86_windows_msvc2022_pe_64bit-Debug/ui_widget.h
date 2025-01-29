@@ -32,6 +32,7 @@ public:
     QTextEdit *priceLine;
     QTextBrowser *textBrowser_4;
     QTextEdit *dateLine;
+    QPushButton *AddImage;
 
     void setupUi(QWidget *Widget)
     {
@@ -82,6 +83,10 @@ public:
         dateLine->setObjectName("dateLine");
         dateLine->setGeometry(QRect(240, 170, 231, 61));
         dateLine->setFont(font);
+        AddImage = new QPushButton(Widget);
+        AddImage->setObjectName("AddImage");
+        AddImage->setGeometry(QRect(530, 90, 151, 61));
+        AddImage->setFont(font);
 
         retranslateUi(Widget);
 
@@ -129,6 +134,7 @@ public:
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:15pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Date:</p></body></html>", nullptr));
         dateLine->setPlaceholderText(QCoreApplication::translate("Widget", "product date", nullptr));
+        AddImage->setText(QCoreApplication::translate("Widget", "Add Image", nullptr));
     } // retranslateUi
 
 };

@@ -5,7 +5,6 @@
 #include "registration.h"
 #include "login.h"
 #include "widget.h"
-#include "database.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {class MainWindow;}

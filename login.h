@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QSqlQuery>
 #include <QSqlError>
-#include <QCryptographicHash> // For password hashing
+#include <QCryptographicHash>
 
 namespace Ui {
 class Login;

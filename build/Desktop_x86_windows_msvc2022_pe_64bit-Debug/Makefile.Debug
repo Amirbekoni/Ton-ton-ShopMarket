@@ -19,7 +19,7 @@ CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStri
 INCPATH       = -I..\..\..\ShopMarket -I. -IC:\Qt\6.8.0\msvc2022_64\include -IC:\Qt\6.8.0\msvc2022_64\include\QtWidgets -IC:\Qt\6.8.0\msvc2022_64\include\QtGui -IC:\Qt\6.8.0\msvc2022_64\include\QtSql -IC:\Qt\6.8.0\msvc2022_64\include\QtCore -Idebug -I. -I/include -IC:\Qt\6.8.0\msvc2022_64\mkspecs\win32-msvc 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = C:\Qt\6.8.0\msvc2022_64\lib\Qt6Widgetsd.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Guid.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Sqld.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Cored.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6EntryPointd.lib shell32.lib  
+LIBS          = C:\Qt\6.8.0\msvc2022_64\lib\Qt6Widgetsd.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Guid.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Sqld.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Cored.lib debug\file.res.txt C:\Qt\6.8.0\msvc2022_64\lib\Qt6EntryPointd.lib shell32.lib  
 QMAKE         = C:\Qt\6.8.0\msvc2022_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\file.res.txt
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -158,11 +158,14 @@ DESTDIR_TARGET = debug\ShopMarket.exe
 first: all
 all: Makefile.Debug  debug\ShopMarket.exe
 
-debug\ShopMarket.exe: C:\Qt\6.8.0\msvc2022_64\lib\Qt6Widgetsd.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Guid.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Sqld.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Cored.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6EntryPointd.lib ui_login.h ui_mainwindow.h ui_registration.h ui_widget.h $(OBJECTS) 
+debug\ShopMarket.exe: C:\Qt\6.8.0\msvc2022_64\lib\Qt6Widgetsd.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Guid.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Sqld.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6Cored.lib C:\Qt\6.8.0\msvc2022_64\lib\Qt6EntryPointd.lib ui_login.h ui_mainwindow.h ui_registration.h ui_widget.h $(OBJECTS) debug\file.res.txt
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
 debug\database.obj debug\login.obj debug\loginmanager.obj debug\main.obj debug\mainwindow.obj debug\registration.obj debug\widget.obj debug\moc_login.obj debug\moc_mainwindow.obj debug\moc_registration.obj debug\moc_widget.obj
 $(LIBS)
 <<
+
+debug\file.res.txt: ..\..\file.rc.txt
+	rc /NOLOGO -D_DEBUG $(DEFINES) -fo debug\file.res.txt ..\..\file.rc.txt
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\..\ShopMarket.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -175,6 +178,7 @@ dist:
 clean: compiler_clean 
 	-$(DEL_FILE) debug\database.obj debug\login.obj debug\loginmanager.obj debug\main.obj debug\mainwindow.obj debug\registration.obj debug\widget.obj debug\moc_login.obj debug\moc_mainwindow.obj debug\moc_registration.obj debug\moc_widget.obj
 	-$(DEL_FILE) debug\ShopMarket.vc.pdb debug\ShopMarket.ilk debug\ShopMarket.idb
+	-$(DEL_FILE) debug\file.res.txt
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash debug\ShopMarket.pdb
@@ -628,6 +632,28 @@ debug\moc_mainwindow.cpp: ..\..\mainwindow.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlayout.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlayoutitem.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qgridlayout.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QListWidget \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlistwidget.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlistview.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractitemview.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractscrollarea.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qframe.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qabstractitemmodel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qitemselectionmodel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractitemdelegate.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qstyleoption.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qvalidator.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qregularexpression.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qslider.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractslider.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qstyle.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qtabbar.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qrubberband.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QLabel \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlabel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qpicture.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qtextdocument.h \
 		..\..\database.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtSql\QSqlDatabase \
 		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QDebug \
@@ -1032,6 +1058,29 @@ debug\moc_widget.cpp: ..\..\widget.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlayoutitem.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qgridlayout.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QString \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QListWidget \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlistwidget.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlistview.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractitemview.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractscrollarea.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qframe.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qabstractitemmodel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qitemselectionmodel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractitemdelegate.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qstyleoption.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qvalidator.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qregularexpression.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qslider.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractslider.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qstyle.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qtabbar.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qtabwidget.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qrubberband.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QLabel \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlabel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qpicture.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qtextdocument.h \
 		..\..\database.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtSql\QSqlDatabase \
 		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qsqldatabase.h \
@@ -1738,6 +1787,28 @@ debug\main.obj: ..\..\main.cpp C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QApplic
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlayout.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlayoutitem.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qgridlayout.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QListWidget \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlistwidget.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlistview.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractitemview.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractscrollarea.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qframe.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qabstractitemmodel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qitemselectionmodel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractitemdelegate.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qstyleoption.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qvalidator.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qregularexpression.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qslider.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractslider.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qstyle.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qtabbar.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qrubberband.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QLabel \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlabel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qpicture.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qtextdocument.h \
 		..\..\database.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtSql\QSqlDatabase \
 		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QDebug
@@ -1962,16 +2033,33 @@ debug\mainwindow.obj: ..\..\mainwindow.cpp ..\..\mainwindow.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlayout.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlayoutitem.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qgridlayout.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QListWidget \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlistwidget.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlistview.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractitemview.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractscrollarea.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qframe.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qabstractitemmodel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qitemselectionmodel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractitemdelegate.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qstyleoption.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qvalidator.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qregularexpression.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qslider.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qabstractslider.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qstyle.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qtabbar.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qrubberband.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QLabel \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlabel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qpicture.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qtextdocument.h \
 		..\..\database.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtSql\QSqlDatabase \
 		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QDebug \
 		ui_mainwindow.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QVariant \
-		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QLabel \
-		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlabel.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qframe.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qpicture.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qtextdocument.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QMenuBar \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qmenubar.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qmenu.h \
@@ -2410,20 +2498,6 @@ debug\widget.obj: ..\..\widget.cpp ..\..\widget.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlayoutitem.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qgridlayout.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QString \
-		..\..\database.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtSql\QSqlDatabase \
-		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qsqldatabase.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qtsqlglobal.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qtsql-config.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qtsqlexports.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qmetaobject.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtSql\QSqlError \
-		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qsqlerror.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtSql\QSqlQuery \
-		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qsqlquery.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QDebug \
-		ui_widget.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QVariant \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QListWidget \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlistwidget.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlistview.h \
@@ -2443,10 +2517,27 @@ debug\widget.obj: ..\..\widget.cpp ..\..\widget.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qtabbar.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qrubberband.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QLabel \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlabel.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qpicture.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qtextdocument.h \
+		..\..\database.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtSql\QSqlDatabase \
+		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qsqldatabase.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qtsqlglobal.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qtsql-config.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qtsqlexports.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qmetaobject.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtSql\QSqlError \
+		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qsqlerror.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtSql\QSqlQuery \
+		C:\Qt\6.8.0\msvc2022_64\include\QtSql\qsqlquery.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QDebug \
+		ui_widget.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QVariant \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QTextBrowser \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qtextbrowser.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qtextedit.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qtextdocument.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qtextoption.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qtextcursor.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtGui\qtextformat.h \
@@ -2461,9 +2552,28 @@ debug\widget.obj: ..\..\widget.cpp ..\..\widget.h \
 		..\..\login.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QCryptographicHash \
 		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qcryptographichash.h \
+		..\..\loginmanager.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QMessageBox \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qmessagebox.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qdialogbuttonbox.h
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qdialogbuttonbox.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QDate \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qdatetime.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qcalendar.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QHBoxLayout \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QListWidgetItem \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QInputDialog \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qinputdialog.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qlineedit.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QFileDialog \
+		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qfiledialog.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qdir.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qdirlisting.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qfiledevice.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qfile.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qfileinfo.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qtimezone.h \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QFile \
+		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QDir
 
 debug\moc_login.obj: debug\moc_login.cpp 
 

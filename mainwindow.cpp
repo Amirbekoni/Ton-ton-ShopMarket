@@ -19,8 +19,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_registrationBtn_clicked()
 {
-    Registration regWindow;
-    if(regWindow.exec() == QDialog::Accepted){
+    Registration *regWindow = new Registration(this);
+    if(regWindow->exec() == QDialog::Accepted){
         qDebug() << "Welcome!";
 
         static Widget widgetWindow;
@@ -33,17 +33,17 @@ void MainWindow::on_registrationBtn_clicked()
         qDebug() << "ERROR, registration failed!";
         close();
     }
+
+    delete regWindow;
 }
 
 
 void MainWindow::on_loginBtn_clicked()
 {
-    Login loginWindow;
-    if (loginWindow.exec() == QDialog::Accepted) {
+    Login *loginWindow = new Login(this);
+    if (loginWindow->exec() == QDialog::Accepted) {
         static Widget widgetWindow;
-        widgetWindow.currentUserName = loginWindow.getName();
-        widgetWindow.loadProducts();
-
+        widgetWindow.currentUserName = loginWindow->getName();
         widgetWindow.loadProducts();
         widgetWindow.show();
 
@@ -51,4 +51,6 @@ void MainWindow::on_loginBtn_clicked()
     } else {
         qDebug() << "ERROR";
     }
+
+    delete loginWindow;
 }

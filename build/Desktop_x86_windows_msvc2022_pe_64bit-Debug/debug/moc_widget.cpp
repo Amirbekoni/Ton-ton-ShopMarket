@@ -41,13 +41,16 @@ constexpr auto qt_meta_stringdata_CLASSWidgetENDCLASS = QtMocHelpers::stringData
     "",
     "Annihilation",
     "on_Backbtn_clicked",
-    "deleteProductRow",
+    "addProductRow",
     "productName",
-    "QListWidgetItem*",
-    "item",
+    "price",
+    "imagePath",
     "editProductRow",
     "oldProductName",
-    "oldPrice"
+    "oldPrice",
+    "QListWidgetItem*",
+    "item",
+    "on_AddImage_clicked"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -60,7 +63,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSWidgetENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -68,18 +71,20 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSWidgetENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   44,    2, 0x08,    1 /* Private */,
-       3,    0,   45,    2, 0x08,    2 /* Private */,
-       4,    0,   46,    2, 0x08,    3 /* Private */,
-       5,    2,   47,    2, 0x08,    4 /* Private */,
-       9,    3,   52,    2, 0x08,    7 /* Private */,
+       1,    0,   50,    2, 0x08,    1 /* Private */,
+       3,    0,   51,    2, 0x08,    2 /* Private */,
+       4,    0,   52,    2, 0x08,    3 /* Private */,
+       5,    3,   53,    2, 0x08,    4 /* Private */,
+       9,    3,   60,    2, 0x08,    8 /* Private */,
+      14,    0,   67,    2, 0x08,   12 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, 0x80000000 | 7,    6,    8,
-    QMetaType::Void, QMetaType::QString, QMetaType::Double, 0x80000000 | 7,   10,   11,    8,
+    QMetaType::Void, QMetaType::QString, QMetaType::Double, QMetaType::QString,    6,    7,    8,
+    QMetaType::Void, QMetaType::QString, QMetaType::Double, 0x80000000 | 12,   10,   11,   13,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -99,15 +104,18 @@ Q_CONSTINIT const QMetaObject Widget::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_Backbtn_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'deleteProductRow'
+        // method 'addProductRow'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>,
+        QtPrivate::TypeAndForceComplete<double, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         // method 'editProductRow'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         QtPrivate::TypeAndForceComplete<double, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>
+        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>,
+        // method 'on_AddImage_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -121,8 +129,9 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 0: _t->Addition(); break;
         case 1: _t->Annihilation(); break;
         case 2: _t->on_Backbtn_clicked(); break;
-        case 3: _t->deleteProductRow((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[2]))); break;
+        case 3: _t->addProductRow((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<double>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
         case 4: _t->editProductRow((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<double>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[3]))); break;
+        case 5: _t->on_AddImage_clicked(); break;
         default: ;
         }
     }
@@ -147,13 +156,13 @@ int Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

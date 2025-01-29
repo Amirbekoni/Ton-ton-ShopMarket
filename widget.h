@@ -33,14 +33,13 @@ private slots:
     void Addition();
     void Annihilation();
     void on_Backbtn_clicked();
-    void deleteProductRow(const QString &productName, QListWidgetItem *item);
+    void addProductRow(const QString &productName, double price, const QString &imagePath);
     void editProductRow(const QString &oldProductName, double oldPrice, QListWidgetItem *item);
-
+    void on_AddImage_clicked();
 private:
     Ui::Widget *ui;
     Database db;
 
-    void addProductRow(const QString &productName, double price);
 };
 
 #endif
